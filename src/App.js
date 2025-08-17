@@ -32,7 +32,8 @@ function App() {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-4 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Todo List</h1>
+      <div className="holder">
+        <h1 className="text-2xl font-bold mb-4">Todo List</h1>
       
       <div className="flex mb-4">
         <input
@@ -70,6 +71,8 @@ function App() {
           </li>
         ))}
       </ul>
+      </div>
+      <footer>Copyright &copy; CA_ToDo 2025 | All rights reserved</footer>
     </div>
   );
 }
