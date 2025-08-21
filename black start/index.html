@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Otto Wilson — Portfolio • Advanced PWA</title>
+  <meta name="description" content="Advanced, responsive, accessible portfolio. Projects, blog, contact, and PWA features in a single file."/>
+  <meta name="theme-color" content="#0c1222"/>
+  <meta property="og:title" content="Otto Wilson — Portfolio"/>
+  <meta property="og:description" content="Developer portfolio with live projects, blog, and contact."/>
+  <meta property="og:type" content="website"/>
+  <style>
+    :root{
+      --bg:#0c1222;--card:#111a2f;--muted:#8b95a7;--text:#ecf1f8;--brand:#7c9cff;--accent:#22e3b2;--ring:0 0 0 2px rgba(124,156,255,.35);--shadow:0 10px 30px rgba(0,0,0,.35);--radius:18px;--up:#23d18b;--down:#ff5a77
+    }
+    [data-theme="light"]{--bg:#f7f9fc;--card:#ffffff;--muted:#5a667a;--text:#0c1222;--brand:#3554ff;--accent:#0cb996}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;color:var(--text);background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(124,156,255,.18), transparent),var(--bg);line-height:1.5}
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    .app{max-width:1200px;margin-inline:auto;padding:16px;display:grid;gap:16px;grid-template-rows:auto 1fr auto;min-height:100vh}
+    header{position:sticky;top:0;z-index:10;background:linear-gradient(to bottom, rgba(0,0,0,.35), transparent);backdrop-filter:blur(6px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 8px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.4px}
+    .badge{font-size:12px;background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff;padding:4px 10px;border-radius:999px}
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{background:var(--card);border:1px solid rgba(255,255,255,.08);color:var(--text);padding:10px 12px;border-radius:12px;cursor:pointer;transition:.2s transform,.2s background}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(180deg, rgba(124,156,255,.22), rgba(124,156,255,.08));border-color:rgba(124,156,255,.45)}
+    .btn.ghost{background:transparent;border-color:rgba(255,255,255,.12)}
+    .grid{display:grid;gap:16px}
+    .panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}
+    @media (max-width:1000px){.hero{grid-template-columns:1fr}}
+    .chip{font-size:12px;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 10px}
+    h1{font-size:clamp(28px,4vw,46px);margin:8px 0 10px}
+    h2{font-size:20px;margin:6px 0 10px}
+    p{margin:0 0 8px}
+    .avatar{border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    @media (max-width:800px){.kpis{grid-template-columns:repeat(2,1fr)}}
+    .kpi{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px}
+    .section{display:grid;grid-template-columns:1fr;gap:12px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width:1100px){.cards{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:700px){.cards{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+    .card .body{padding:12px;display:flex;flex-direction:column;gap:8px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+    .tag{padding:2px 8px;border:1px solid rgba(255,255,255,.12);border-radius:999px;font-size:11px}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .list{display:grid;gap:8px}
+    .timeline{position:relative}
+    .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--brand),transparent)}
+    .step{display:grid;grid-template-columns:auto 1fr;gap:10px}
+    .dot{width:22px;height:22px;border-radius:999px;background:var(--brand);box-shadow:0 0 0 3px rgba(124,156,255,.2)}
+    .prog{height:120px}
+    .spark{height:36px;width:96px}
+    dialog{border:0;border-radius:16px;padding:0;max-width:900px;width:95vw;background:var(--card);color:var(--text)}
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;padding:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .modal-body{padding:14px}
+    footer{opacity:.8;font-size:12px;display:flex;gap:8px;align-items:center;justify-content:space-between}
+    .kbd{font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New";background:rgba(255,255,255,.06);padding:2px 6px;border-radius:6px;border:1px solid rgba(255,255,255,.12)}
+  </style>
+</head>
+<body>
+<div class="app" id="app">
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l6 6-6 12L6 9 12 3Z" stroke="currentColor" opacity=".4"/><path d="M12 6l4 4-4 8-4-8 4-4Z" stroke="currentColor"/></svg>
+        <span>Otto Wilson</span>
+        <span class="badge">Portfolio</span>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" id="themeBtn" title="Toggle theme"> Theme setting</button>
+        <button class="btn" id="installBtn" hidden>⬇ Install</button>
+        <a class="btn primary" href="#contact">Hire me</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="grid" id="content" tabindex="-1">
+    <!-- HERO -->
+    <section class="panel hero" id="hero">
+      <div>
+        <div class="toolbar"><span class="chip">Full‑Stack Engineer</span><span class="chip">PWA • Realtime • Data Viz . Structured programmer</span></div>
+        <h1>Building delightful, resilient web apps.
+          <span id="type" aria-live="polite" style="display:block;font-size:clamp(16px,2vw,18px);opacity:.9"></span>
+        </h1>
+        <p>I design and ship modern, accessible, high‑performance experiences. Below are selected projects, a living skill radar, and ways to reach me.</p>
+        <div class="toolbar">
+          <a class="btn" href="#projects">View projects</a>
+          <a class="btn ghost" id="dlResume">⬇ Download résumé</a>
+        </div>
+        <div class="kpis" style="margin-top:10px">
+          <div class="kpi"><div class="meta">Years</div><strong id="kpiYears">—</strong></div>
+          <div class="kpi"><div class="meta">Projects</div><strong id="kpiProjects">—</strong></div>
+          <div class="kpi"><div class="meta">Clients</div><strong id="kpiClients">—</strong></div>
+          <div class="kpi"><div class="meta">Uptime</div><strong id="kpiUptime">—</strong></div>
+        </div>
+      </div>
+      <div class="avatar">
+        <img src="otto 1.jpg" alt="Workspace setup" loading="lazy"/>
+      </div>
+    </section>
+
+    <!-- SKILLS / RADAR + SPARKS -->
+    <section class="panel section" id="skills">
+      <h2>Skills & velocity</h2>
+      <div class="toolbar">
+        <span class="tag">Canvas charts</span>
+        <span class="tag">Animated on view</span>
+        <span class="tag">Saved locally</span>
+        
+      </div>
+      <div class="cards">
+        <div class="card"><canvas id="radar" height="260"></canvas><div class="body"><div class="meta">Radar: JS • CSS • HTML • Node • DevOps • UX . Structure Programming Engineer</div></div></div>
+        <div class="card"><canvas class="spark" id="prodSpark" width="160" height="48"></canvas><div class="body"><strong>Weekly productivity</strong><div class="meta">Commits trend (last 12w)</div></div></div>
+        <div class="card"><canvas class="spark" id="latencySpark" width="160" height="48"></canvas><div class="body"><strong>Build latency</strong><div class="meta">CI mins by run</div></div></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="panel section" id="projects">
+      <h2>Selected projects</h2>
+      <div class="toolbar">
+        <input id="q" class="btn" style="min-width:220px" placeholder="Filter by name, tag, tech (⌘/Ctrl+K)"/>
+        <select id="tech" class="btn"><option value="">All tech</option><option>React</option><option>Vanilla JS</option><option>Node</option><option>Python</option><option>Structured Programming</option></select>
+        <button class="btn" id="shuffle">Shuffle</button>
+        <button class="btn ghost" id="layout">↕ Masonry</button>
+      </div>
+      <div id="projectGrid" class="cards" aria-live="polite"></div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="panel section" id="experience">
+      <h2>Experience</h2>
+      <div class="timeline list" id="timeline"></div>
+    </section>
+
+    <!-- BLOG (Client-side router example) -->
+    <section class="panel section" id="blog">
+      <h2>Writing</h2>
+      <div id="posts" class="list"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="panel section" id="contact">
+      <h2>Contact</h2>
+      <form id="contactForm" class="list" autocomplete="on">
+        <div class="toolbar">
+          <input class="btn" name="name" placeholder="Your name" required/>
+          <input class="btn" type="email" name="email" placeholder="Email" required/>
+        </div>
+        <textarea class="btn" name="message" placeholder="Tell me about your project" rows="5" required></textarea>
+        <input type="text" name="company" class="btn" placeholder="Company (optional)"/>
+        <input type="text" name="website" class="btn" placeholder="Website (optional)"/>
+        <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+        <div class="toolbar">
+          <button class="btn primary" type="submit">Send</button>
+          <label class="btn ghost" title="Save a copy"><input type="checkbox" id="saveCopy"> Save locally</label>
+        </div>
+        <div id="formStatus" class="tag">Ready</div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> Otto Wilson • Built as a single‑file PWA • Hotkeys: <span class="kbd">/</span> focus, <span class="kbd">g</span> go to, <span class="kbd">t</span> theme</div>
+    <div id="status" class="tag">Ready</div>
+  </footer>
+
+  <dialog id="dlg">
+    <div class="modal-head"><strong id="dlgTitle">Item</strong><button class="btn ghost" id="dlgClose">✕</button></div>
+    <div class="modal-body" id="dlgBody"></div>
+  </dialog>
+</div>
+
+<script type="module">
+/************ Utilities ************/
+const $ = (s, r=document)=>r.querySelector(s); const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const sleep = (ms)=>new Promise(r=>setTimeout(r,ms));
+const fmt = (n,opts={})=> new Intl.NumberFormat(undefined,{maximumFractionDigits:2,...opts}).format(n);
+const store = (k,v)=> (localStorage.setItem(k, JSON.stringify(v)), v);
+const read = (k, d=null)=> { try{return JSON.parse(localStorage.getItem(k)) ?? d;}catch{return d;}};
+const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+
+/************ State (EventTarget + Proxy) ************/
+class AppState extends EventTarget{ data={ theme: read('theme') || (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'), projects:[], posts:[], exp:[], kpis:{years:5,projects:42,clients:18,uptime:99.98} }; proxy=new Proxy(this.data,{set:(o,k,v)=>{o[k]=v; this.dispatchEvent(new CustomEvent('change',{detail:{k,v}})); return true;}}); get(){return this.proxy;}}
+const state = new AppState();
+
+/************ Theme ************/
+function setTheme(t){ document.documentElement.setAttribute('data-theme', t==='light'?'light':'dark'); store('theme', t);} setTheme(state.get().theme);
+$('#themeBtn').addEventListener('click',()=>{ const t = document.documentElement.getAttribute('data-theme')==='light'?'dark':'light'; state.get().theme=t; setTheme(t); });
+
+/************ Typewriter (WAAPI) ************/
+const phrases = ["Realtime apps, zero flake.","Offline‑first PWAs.","APIs & data viz.","Enterprise‑grade dashboards."];
+(async function type(){ const el = $('#type'); for(;;){ for(const p of phrases){ el.textContent=''; for(const ch of p){ el.textContent+=ch; await sleep(40);} await sleep(1200); for(let i=p.length;i>=0;i--){ el.textContent=p.slice(0,i); await sleep(14);} await sleep(200);} } })();
+
+/************ KPIs animate on view ************/
+const kpiEls = {years:$('#kpiYears'),projects:$('#kpiProjects'),clients:$('#kpiClients'),uptime:$('#kpiUptime')};
+new IntersectionObserver((ents)=>{ for(const e of ents){ if(e.isIntersecting){ const {years,projects,clients,uptime}=state.get().kpis; animateCount(kpiEls.years, years, 1200); animateCount(kpiEls.projects, projects, 1200); animateCount(kpiEls.clients, clients, 1200); animateCount(kpiEls.uptime, uptime, 1200, true); }} },{threshold:.3}).observe($('#hero'));
+function animateCount(el, target, dur=1000, fixed=false){ const t0=performance.now(); const step=(t)=>{ const p=clamp((t-t0)/dur,0,1); const v = fixed? (target*p).toFixed(2)+'%': Math.round(target*p); el.textContent=v; if(p<1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
+
+/************ Canvas Radar + Sparks ************/
+function radar(canvas, labels, values){ const ctx=canvas.getContext('2d'); const w=canvas.width=canvas.offsetWidth; const h=canvas.height=260; const cx=w/2, cy=h/2, r=Math.min(w,h)/2-20; const N=labels.length; ctx.clearRect(0,0,w,h); ctx.globalAlpha=.9; // grid
+  ctx.strokeStyle='rgba(255,255,255,.25)'; for(let i=1;i<=4;i++){ ctx.beginPath(); for(let a=0;a<=N;a++){ const ang=(a/N)*Math.PI*2; const rr=r*(i/4); const x=cx+Math.cos(ang)*rr; const y=cy+Math.sin(ang)*rr; if(a===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);} ctx.stroke(); }
+  // axes
+  for(let a=0;a<N;a++){ const ang=(a/N)*Math.PI*2; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(ang)*r, cy+Math.sin(ang)*r); ctx.stroke(); }
+  // polygon
+  ctx.beginPath(); for(let a=0;a<=N;a++){ const ang=(a/N)*Math.PI*2; const rr=r*(values[a%N]); const x=cx+Math.cos(ang)*rr; const y=cy+Math.sin(ang)*rr; if(a===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);} ctx.closePath(); ctx.fillStyle='rgba(124,156,255,.25)'; ctx.fill(); ctx.strokeStyle='rgba(124,156,255,.8)'; ctx.lineWidth=2; ctx.stroke();
+  // labels
+  ctx.fillStyle='currentColor'; ctx.font='12px system-ui'; labels.forEach((lab,i)=>{ const ang=(i/N)*Math.PI*2; const x=cx+Math.cos(ang)*(r+10); const y=cy+Math.sin(ang)*(r+10); ctx.fillText(lab, x- ctx.measureText(lab).width/2, y); }); }
+function spark(canvas, series){ const ctx=canvas.getContext('2d'); const w=canvas.width; const h=canvas.height; ctx.clearRect(0,0,w,h); const min=Math.min(...series), max=Math.max(...series); const x=i=> i/(series.length-1)*w; const y=v=> h - (v-min)/(max-min||1)*h; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(0,y(series[0])); series.forEach((v,i)=> ctx.lineTo(x(i), y(v))); ctx.strokeStyle = series.at(-1)>=series[0] ? getComputedStyle(document.documentElement).getPropertyValue('--up') : getComputedStyle(document.documentElement).getPropertyValue('--down'); ctx.stroke(); }
+
+const radarLabels=["JS","CSS","HTML","Node","DevOps","UX"]; const radarVals=[.95,.9,.95,.8,.7,.85];
+const prod=Array.from({length:60}, ()=> Math.random()*10+10).map((v,i)=> v+i*0.06);
+const lat=Array.from({length:60}, ()=> Math.random()*10+5).map((v,i)=> v - i*0.05);
+
+new ResizeObserver(()=>{ radar($('#radar'), radarLabels, radarVals); spark($('#prodSpark'), prod.slice(-40)); spark($('#latencySpark'), lat.slice(-40)); }).observe($('#skills'));
+
+/************ Content ************/
+const CONTENT = {
+  projects:[
+    {id:'nova-wire', name:'NovaWire - Crypto Super implementation', cover:'https://media.istockphoto.com/id/2182706728/photo/abstract-cryptocurrency-coin-on-cpu-with-data-and-code-crypto-payments-crypto-wallet.webp?s=2048x2048&w=is&k=20&c=Uh7qd519JUgcASNfMqoamUpddf9WA2SHwWzrAz6j6IY=', desc:'Realtime news, crypto markets, WS tickers, converter, PWA.', tech:['Vanilla JS','PWA','WebSocket'], url:'#', repo:'#', stats:{stars:420, perf:98, users:12000}},
+    {id:'smartshift', name:'SmartShift — Workforce Platform', cover:'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', desc:'Scheduling, time tracking, reporting, admin flows in one system manager.', tech:['Node','Vanilla JS','Reports'], url:'#', repo:'#', stats:{stars:318, perf:95, users:6400}},
+    {id:'studiokit', name:'Hardware System — Design Manufacturing', cover:'https://plus.unsplash.com/premium_photo-1681426687411-21986b0626a8?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', desc:'Tokens, components, themes, and accessibility baked in.', tech:['React','Vanilla JS','A11y'], url:'#', repo:'#', stats:{stars:210, perf:99, users:2400}},
+    {id:'tensor-viz', name:'TensorViz — ML Visualizer', cover:'https://plus.unsplash.com/premium_photo-1661878265739-da90bc1af051?q=80&w=786&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', desc:'Interactive model explorer with WebGL charts.', tech:['WebGL','Python','DataViz'], url:'#', repo:'#', stats:{stars:560, perf:93, users:1500}},
+    {id:'mnemos', name:'Mnemos — Memory Match', cover:'https://plus.unsplash.com/premium_photo-1663050681752-4c95effcca58?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', desc:'Accessibility‑first game with leaderboards.', tech:['Vanilla JS','Game','PWA'], url:'#', repo:'#', stats:{stars:170, perf:99, users:11000}},
+    {id:'voyagera', name:'Programming Code Abstract technology - App Development', cover:'https://plus.unsplash.com/premium_photo-1661877737564-3dfd7282efcb?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', desc:'Offline‑first itinerary builder, maps, budgets.', tech:['React','PWA','Maps'], url:'#', repo:'#', stats:{stars:260, perf:96, users:5200}}
+  ],
+  posts:[
+    {slug:'ship-fast', title:'Ship fast without breaking UX', date:'2025-06-12', minutes:6, tags:['Process','UX']},
+    {slug:'pwa-edge', title:'PWAs at the edge: patterns that work', date:'2025-05-02', minutes:7, tags:['PWA maintanable and reusable system technology','Infra']}
+  ],
+  exp:[
+    {date:'2023 — Present', role:'Senior Frontend Engineer', org:'Nimbus Labs', points:['Led design system adoption','Cut TTI by 42%','Mentored 6 engineers']},
+    {date:'2021 — 2023', role:'Full‑stack Engineer', org:'Atlas', points:['Shipped 12 features','Moved monolith → microfrontends']},
+     {date:'2020 — 2021', role:'Operating System Developer', org:'Freelance', points:['Delivered 5+ OS features','99.9% uptime across clients']},
+    {date:'2019 — 2021', role:'Frontend Developer', org:'Freelance', points:['Delivered 20+ sites','99.9% uptime across clients']}
+  ]
+};
+
+/************ Router (hash) for project modal + blog ************/
+addEventListener('hashchange', handleRoute); function handleRoute(){ const hash=location.hash.slice(1); if(hash.startsWith('p/')){ const id=hash.split('/')[1]; const p=CONTENT.projects.find(x=>x.id===id); if(p) openProject(p); } if(hash.startsWith('post/')){ const slug=hash.split('/')[1]; const post=CONTENT.posts.find(x=>x.slug===slug); if(post) openPost(post); }}
+
+/************ Renderers ************/
+function renderProjects(){ const grid=$('#projectGrid'); const q=$('#q').value.trim().toLowerCase(); const tech=$('#tech').value; const arr=[...CONTENT.projects].filter(p=> (!q||p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||p.tech.join(' ').toLowerCase().includes(q)) && (!tech||p.tech.includes(tech)) ); const frag=document.createDocumentFragment(); arr.forEach(p=>{ const el=document.createElement('article'); el.className='card'; el.draggable=true; el.innerHTML=`<img src="${p.cover}" alt="${p.name}" loading="lazy"><div class="body"><div class=meta><span class=tag>${p.tech.join('</span><span class=tag>')}</span></div><strong>${p.name}</strong><p>${p.desc}</p><div class=toolbar><button class="btn" data-open>Details</button><a class="btn ghost" href="${p.repo}" target=_blank rel=noopener>Repo</a></div></div>`; el.querySelector('[data-open]').addEventListener('click',()=> openProject(p)); el.addEventListener('dragstart', onDragStart); el.addEventListener('dragover', onDragOver); el.addEventListener('drop', onDrop); frag.append(el); }); grid.replaceChildren(frag); $('#status').textContent = `${arr.length} projects shown`; }
+
+function renderTimeline(){ const list=$('#timeline'); list.innerHTML = CONTENT.exp.map(e=>`<div class=step><div class=dot></div><div><strong>${e.role}</strong> — ${e.org}<div class=meta>${e.date}</div><ul>${e.points.map(p=>`<li>${p}</li>`).join('')}</ul></div></div>`).join(''); }
+
+function renderPosts(){ $('#posts').innerHTML = CONTENT.posts.map(p=>`<article class=card><div class=body><div class=meta><span class=tag>${new Date(p.date).toLocaleDateString()}</span><span class=tag>${p.minutes} min</span></div><strong>${p.title}</strong><p><a class=btn href="#post/${p.slug}">Read →</a></p></div></article>`).join(''); }
+
+/************ Project Modal ************/
+const dlg=$('#dlg'); $('#dlgClose').addEventListener('click',()=> dlg.close());
+function openProject(p){ $('#dlgTitle').textContent=p.name; $('#dlgBody').innerHTML=`<img src="${p.cover}" alt=""><p>${p.desc}</p><div class=meta>Tech: ${p.tech.join(', ')}</div><div class=toolbar><a class=btn href="#" onclick="history.back();return false">Close</a><a class=btn ghost target=_blank rel=noopener href="${p.url}">Live</a></div>`; dlg.showModal(); }
+function openPost(post){ $('#dlgTitle').textContent=post.title; $('#dlgBody').innerHTML=`<div class=meta>${new Date(post.date).toLocaleDateString()} • ${post.minutes} min</div><p>This is a placeholder client‑rendered post. Hook your CMS or Markdown loader here.</p><p>Tags: ${post.tags.map(t=>`<span class=tag>${t}</span>`).join(' ')}</p>`; dlg.showModal(); }
+
+/************ Project DnD reorder (persisted) ************/
+let dragIdx=null; function onDragStart(e){ const idx=[...$('#projectGrid').children].indexOf(e.currentTarget); dragIdx=idx; e.dataTransfer.setData('text/plain', idx); e.effectAllowed='move'; }
+function onDragOver(e){ e.preventDefault(); e.dataTransfer.dropEffect='move'; }
+function onDrop(e){ e.preventDefault(); const from=dragIdx, to=[...$('#projectGrid').children].indexOf(e.currentTarget); const arr=CONTENT.projects; arr.splice(to,0, arr.splice(from,1)[0]); store('projects-order', arr.map(p=>p.id)); renderProjects(); }
+const savedOrder = read('projects-order'); if(savedOrder){ CONTENT.projects.sort((a,b)=> savedOrder.indexOf(a.id)-savedOrder.indexOf(b.id)); }
+
+/************ Search + controls ************/
+$('#q').addEventListener('input', debounce(renderProjects, 250)); $('#tech').addEventListener('change', renderProjects); $('#shuffle').addEventListener('click', ()=>{ CONTENT.projects.sort(()=> Math.random()-.5); renderProjects(); });
+let masonry=false; $('#layout').addEventListener('click', ()=>{ masonry=!masonry; const grid=$('#projectGrid'); grid.style.gridAutoRows = masonry? '1fr':'auto'; grid.style.gridTemplateRows = masonry? 'masonry': 'initial'; renderProjects(); });
+
+/************ Hotkeys ************/
+addEventListener('keydown', (e)=>{ if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); $('#q').focus(); } if(e.key==='t'){ $('#themeBtn').click(); } if(e.key==='g'){ $('#content').focus(); } });
+
+/************ Contact form (validate + local save + fake send) ************/
+$('#contactForm').addEventListener('submit', async (e)=>{ e.preventDefault(); const fd = new FormData(e.currentTarget); if(fd.get('_hp')) return; const data=Object.fromEntries(fd.entries()); const ok = data.name && data.email && data.message; const status=$('#formStatus'); if(!ok){ status.textContent='Please complete all required fields'; return; } if($('#saveCopy').checked) store('contact-draft', data); status.textContent='Sending…'; await sleep(600); status.textContent='Sent! I will reply shortly.'; e.currentTarget.reset(); });
+
+/************ PWA: inline Service Worker + Install ************/
+(async function registerSW(){ if(!('serviceWorker' in navigator)) return; const sw = `self.addEventListener('install',e=>{ self.skipWaiting(); e.waitUntil(caches.open('portfolio-v1').then(c=>c.addAll(['./'])) )}); self.addEventListener('activate',e=> self.clients.claim()); self.addEventListener('fetch',e=>{ if(e.request.method!=='GET') return; e.respondWith(caches.match(e.request).then(c=> c || fetch(e.request).then(res=>{ const clone=res.clone(); caches.open('portfolio-v1').then(cc=>cc.put(e.request, clone)); return res; }).catch(()=> c || new Response('',{status:504})))); });`;
+  const blob = new Blob([sw], {type:'text/javascript'}); const url = URL.createObjectURL(blob); try{ await navigator.serviceWorker.register(url); }catch(err){ console.warn('SW failed', err); } })();
+let deferred; addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); deferred=e; $('#installBtn').hidden=false; }); $('#installBtn').addEventListener('click',()=>{ if(deferred){ deferred.prompt(); deferred=null; $('#installBtn').hidden=true; }});
+
+/************ Helpers ************/
+function debounce(fn, wait=300){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), wait); } }
+
+/************ Start ************/
+function init(){ renderProjects(); renderTimeline(); renderPosts(); handleRoute(); $('#year').textContent = new Date().getFullYear(); }
+addEventListener('load', init);
+
+</script>
+</body>
+</html>
