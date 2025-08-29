@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <h3>Bienvenue {{request.user.username}}</h3>
+        {% else %}
+        <h3>tu n'as pas access au contenues</h3>
+    {% endif %}
+</body>
+</html>
